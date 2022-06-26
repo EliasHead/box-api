@@ -9,20 +9,22 @@ router.get('/authors', async (req, res) => {
     res.json(authors);
 });
 
-router.get('/authors/:id', async (req, res) => {});
-
 // Inserir dados
 router.post('/authors', async (req, res) => {
-    const body = req.body
-
-    if (!body)
-        return res.status(400).end()
-    
-    db.push(body)
-    return res.json(body)
+    const author = req.body;
+    const newAuthor = await authorsService.saveAuthor(author);
+    res.json(newAuthor);
 });
 
-router.put('/authors/:id', async (req, res) => {});
-router.delete('/authors/:id', async (req, res) => {});
+router.put('/authors/:id', async (req, res) => {
+    const author = req.body;
+    await authorsService.updateAuthor(req.params.id, author);
+    res.end()
+});
+
+router.delete('/authors/:id', async (req, res) => {
+    await authorsService.deleteAuthor(req.params.id);
+    res.end();
+});
 
 module.exports = router;
