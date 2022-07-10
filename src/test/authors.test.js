@@ -9,7 +9,6 @@ const generate = () => crypto.randomBytes(20).toString('hex');
 const request = (url, method, data) => axios({url, method, data});
 
 test('should get authors', async () => {
-
     const author1 =  await authorsService.saveAuthor({name: generate(), picture: generate()});
     const author2 =  await authorsService.saveAuthor({name: generate(), picture: generate()});
     const author3 =  await authorsService.saveAuthor({name: generate(), picture: generate()});
